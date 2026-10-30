@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Para Bladimir 💜</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f7efff;color:#583875;font-family:Georgia,serif;text-align:center}
+button{border:0;border-radius:25px;padding:13px 22px;background:#9365bd;color:white;font-size:16px;cursor:pointer}
+.hidden{display:none!important}
+h1,h2,h3{color:#8051a9}
+#pinScreen{min-height:100vh;display:grid;place-items:center;padding:20px}
+.phone{background:white;border:2px solid #dfc9f2;border-radius:28px;padding:30px 22px;width:min(100%,360px);box-shadow:0 8px 25px #b99bd055}
+.heart{font-size:55px}
+input{width:100%;padding:14px;margin:15px 0;border:2px solid #d9bdec;border-radius:14px;text-align:center;font-size:20px;letter-spacing:5px}
+#main{padding:25px 12px 50px;max-width:850px;margin:auto}
+.subtitle{color:#9874b5}
+.gift-scene{height:260px;display:grid;place-items:center;position:relative;margin:20px auto}
+.gift{width:190px;height:145px;position:relative;cursor:pointer;transition:.5s}
+.gift-base{position:absolute;bottom:0;width:190px;height:115px;background:#a982d0;border:3px solid #754a9c;border-radius:8px}
+.gift-ribbon{position:absolute;left:80px;bottom:0;width:30px;height:115px;background:#f3b9d7;z-index:2}
+.gift-lid{position:absolute;top:10px;left:-9px;width:208px;height:40px;background:#d8c0f1;border:3px solid #754a9c;border-radius:8px;z-index:3;transition:.8s}
+.gift-lid:after{content:"🎀";position:absolute;top:-34px;left:75px;font-size:40px}
+.gift.open .gift-lid{transform:translate(35px,-100px) rotate(17deg)}
+.gift.open{transform:scale(.85)}
+.open-hint{font-size:14px;color:#9673b3}
+#explosion{margin:25px auto;max-width:680px}
+.cross{
+ display:grid;
+ grid-template-columns:1fr 1fr 1fr;
+ grid-template-rows:150px 190px 150px;
+ gap:7px;
+ max-width:650px;
+ margin:auto;
+}
+.flap,.center{
+ background:linear-gradient(145deg,#fff,#eadcf8);
+ border:2px solid #c9a9e6;
+ border-radius:12px;
+ padding:12px 8px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ box-shadow:0 4px 12px #9671b522;
+ min-width:0;
+}
+.flap h3{font-size:16px;margin:3px 0 8px}
+.flap p{font-size:13px;line-height:1.4;margin:5px}
+.top{grid-column:2;grid-row:1}
+.left{grid-column:1;grid-row:2}
+.center{grid-column:2;grid-row:2;background:linear-gradient(145deg,#f5e9ff,#dfc7f4);border-radius:50%;padding:10px}
+.right{grid-column:3;grid-row:2}
+.bottom{grid-column:2;grid-row:3}
+.big-heart{font-size:48px}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;width:100%;font-family:Arial;font-size:11px}
+.calendar span{padding:4px 0;border-radius:6px}
+.mark{background:#a879d0;color:white;font-weight:bold}
+.coupon{border:2px dashed #b38bd0;border-radius:10px;padding:10px;background:#fffaff;transform:rotate(-3deg)}
+.counter{font-family:Arial;font-size:13px;line-height:1.7;font-weight:bold}
+.letter-paper{
+ background:#fff6e4;border:2px solid #dfc79c;
+ border-radius:12px;padding:20px 16px;
+ text-align:left;color:#654d42;
+ font-family:"Brush Script MT",cursive;
+ font-size:17px;line-height:1.65;
+ white-space:pre-line;
+ box-shadow:0 5px 14px #8c6b4b33;
+}
+#letterSection{max-width:650px;margin:25px auto}
+#letterSection h2{text-align:center}
+.small{font-size:12px;color:#9875b4}
+@media(max-width:420px){
+ .cross{grid-template-rows:135px 180px 135px;gap:4px}
+ .flap{padding:7px 4px}
+ .flap h3{font-size:13px}
+ .flap p{font-size:11px}
+ .calendar{font-size:9px}
+ .calendar span{padding:3px 0}
+ .counter{font-size:11px}
+ .letter-paper{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<section id="pinScreen">
+ <div class="phone">
+  <div class="heart">💜</div>
+  <h1>Para mi niño lindo</h1>
+  <p>Tengo una sorpresa preparada para ti.</p>
+  <p>Introduce nuestra fecha especial.</p>
+  <input id="pin" type="password" inputmode="numeric" maxlength="8" placeholder="••••••••">
+  <button onclick="enter()">Abrir mi regalo 💌</button>
+  <p id="error" class="small"></p>
+ </div>
+</section>
+
+<main id="main" class="hidden">
+ <h1>Feliz primer mes, mi amor 💜</h1>
+ <p class="subtitle">Una sorpresa hecha con todo mi corazón.</p>
+
+ <h2>🎁 Nuestra caja explosiva</h2>
+ <p>Toca la caja para descubrir lo que preparé.</p>
+
+ <div class="gift-scene">
+  <div class="gift" id="gift" onclick="openGift()">
+   <div class="gift-base"></div>
+   <div class="gift-ribbon"></div>
+   <div class="gift-lid"></div>
+  </div>
+ </div>
+ <button onclick="openGift()">Abrir nuestra cajita 💗</button>
+
+ <section id="explosion" class="hidden">
+  <h2>¡Todo esto es para ti! 💜</h2>
+  <p class="small">Los cuatro lados de nuestra cajita</p>
+
+  <div class="cross">
+   <div class="flap top">
+    <h3>📅 Nuestro día</h3>
+    <b style="font-size:13px">Octubre 2026</b>
+    <div class="calendar" id="calendar"></div>
+    <p>El día 6 comenzó nuestra historia 💗</p>
+   </div>
+
+   <div class="flap left">
+    <h3>🎟️ Un cupón</h3>
+    <div class="coupon">
+     <b>CU PÓN DE AMOR</b>
+     <p>Vale por abrazos, paciencia y muchos besitos virtuales.</p>
+     <span>💜💜💜</span>
+    </div>
+   </div>
+
+   <div class="center">
+    <div class="big-heart">💜</div>
+    <b>Mi corazón</b>
+    <p class="small">Para ti, amor.</p>
+    <button onclick="showLetter()">Abrir carta 💌</button>
+   </div>
+
+   <div class="flap right">
+    <h3>⏳ Nuestro tiempo</h3>
+    <div class="counter" id="counter">Contando...</div>
+    <p class="small">Desde el 6 de octubre de 2026 a las 3:56 p. m.</p>
+   </div>
+
+   <div class="flap bottom">
+    <h3>💗 Una promesa</h3>
+    <p>Que este sea solamente el primero de muchísimos meses juntos.</p>
+    <div style="font-size:27px">💕</div>
+   </div>
+  </div>
+
+  <section id="letterSection" class="hidden">
+   <h2>💌 Una carta para ti</h2>
+   <div class="letter-paper">Hoy amor ya cumplimos nuestro primer mes, y espero q sea el primero de muchos más, por q no quiero que esto acabe. En este tiempo q te he conocido y q soy tú novia me he sentido muy feliz, me encanta la forma en la q me tratas, en la q me das amor, en la q me entiendes. Nunca nadie me había tenido tanta paciencia como tú la tienes conmigo.
+
+Se q no soy la mejor novia, estoy intentando cambiar por tí, para ser mejor persona. Se q a veces la embarró, y la cago muy feo, y quizás pienses q no me importa lo q hago o en q te afecta.
+
+Hace mucho no sentía este amor como el que siento por tí, es sincero, y cada día te amo más. No me cansaría de amarte, por q sé q te mereces todo el amor q te puedo dar.
+
+Gracias por estar conmigo, y por quererme así como soy.
+
+Te amo mucho y feliz primer mes.
+
+DE: Bry
+PARA: Él amor de mi vida 🖤</div>
+   <p>Con todo mi amor, Bry 💜</p>
+  </section>
+ </section>
+
+ <p class="small">Hecho con amor por Bry, para Bladimir. 💜</p>
+</main>
+
+<script>
+let opened=false;
+function enter(){
+ if(document.getElementById('pin').value==='06102026'){
+  document.getElementById('pinScreen').classList.add('hidden');
+  document.getElementById('main').classList.remove('hidden');
+  makeCalendar();
+  updateCounter();
+  setInterval(updateCounter,1000);
+ }else{
+  document.getElementById('error').textContent='Clave incorrecta. Inténtalo otra vez 💜';
+ }
+}
+function openGift(){
+ opened=!opened;
+ document.getElementById('gift').classList.toggle('open',opened);
+ document.getElementById('explosion').classList.toggle('hidden',!opened);
+}
+function showLetter(){
+ document.getElementById('letterSection').classList.toggle('hidden');
+}
+function makeCalendar(){
+ const cal=document.getElementById('calendar');
+ if(cal.children.length)return;
+ ['L','M','X','J','V','S','D'].forEach(d=>{
+  const s=document.createElement('span');s.textContent=d;cal.appendChild(s);
+ });
+ for(let i=0;i<3;i++){
+  const s=document.createElement('span');cal.appendChild(s);
+ }
+ for(let d=1;d<=31;d++){
+  const s=document.createElement('span');
+  s.textContent=d===6?'♥':d;
+  if(d===6)s.className='mark';
+  cal.appendChild(s);
+ }
+}
+function updateCounter(){
+ const start=new Date('2026-10-06T15:56:00-05:00').getTime();
+ let diff=Date.now()-start;
+ const el=document.getElementById('counter');
+ if(diff<0){el.textContent='Nuestro comienzo se acerca 💜';return;}
+ const days=Math.floor(diff/86400000);diff%=86400000;
+ const hours=Math.floor(diff/3600000);diff%=3600000;
+ const mins=Math.floor(diff/60000);diff%=60000;
+ const secs=Math.floor(diff/1000);
+ el.textContent=days+' días, '+hours+' h, '+mins+' min, '+secs+' s';
+}
+</script>
+</body>
+     </html>
+     
